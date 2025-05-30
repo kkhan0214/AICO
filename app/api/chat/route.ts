@@ -17,15 +17,4 @@ export async function POST(req: NextRequest) {
     });
 
     const data = await response.json();
-
-    // ✅ 여기서 응답 확인!
-    console.log('🔥 GPT 응답 데이터:', data);
-
-    const reply = data.choices?.[0]?.message?.content || '답변을 받아오지 못했어요.';
-    return NextResponse.json({ answer: reply });
-
-  } catch (err) {
-    console.error('❌ GPT API 호출 중 오류 발생:', err);
-    return NextResponse.json({ answer: '서버 오류가 발생했습니다.' }, { status: 500 });
-  }
 }
