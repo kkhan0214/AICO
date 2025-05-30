@@ -3,15 +3,23 @@
 import { useState } from 'react';
 import ChatBubble from './chatBubble';
 
+// ✅ 명시적인 타입 선언
+type Message = {
+  from: 'user' | 'bot';
+  text: string;
+};
+
 export default function Chat() {
-  const [messages, setMessages] = useState<{ from: 'user' | 'bot'; text: string }[]>([]);
+  // ✅ useState에 타입 적용
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
 
   const sendMessage = async () => {
     if (!input.trim()) return;
 
-    const userMsg = { from: 'user', text: input };
+    // ✅ 메시지 객체에 타입 명시
+    const userMsg: Message = { from: 'user', text: input };
     setMessages((prev) => [...prev, userMsg]);
     setLoading(true);
 
@@ -22,10 +30,12 @@ export default function Chat() {
         body: JSON.stringify({ message: input }),
       });
       const data = await res.json();
-      const botMsg = { from: 'bot', text: data.answer };
+
+      const botMsg: Message = { from: 'bot', text: data.answer };
       setMessages((prev) => [...prev, botMsg]);
     } catch (err) {
-      setMessages((prev) => [...prev, { from: 'bot', text: '오류가 발생했어요 😢' }]);
+      const errorMsg: Message = { from: 'bot', text: '오류가 발생했어요 😢' };
+      setMessages((prev) => [...prev, errorMsg]);
     } finally {
       setInput('');
       setLoading(false);
