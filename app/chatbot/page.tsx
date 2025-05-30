@@ -3,14 +3,23 @@
 import { useState } from 'react';
 import ChatBubble from '@/components/chatBubble';
 
-export default function ChatbotPage() {
-  const [date] = useState(new Date().toLocaleTimeString('en-US', {
-    hour: 'numeric',
-    minute: '2-digit',
-    hour12: true,
-  }));
+// 메시지 타입 정의
+type Message = {
+  from: 'user' | 'bot';
+  text: string;
+};
 
-  const [messages, setMessages] = useState([
+export default function ChatbotPage() {
+  const [date] = useState(
+    new Date().toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+    })
+  );
+
+  // 메시지 상태 타입 명시
+  const [messages, setMessages] = useState<Message[]>([
     { from: 'bot', text: '안녕하세요! 무엇을 도와드릴까요?' },
     { from: 'bot', text: '파이썬을 공부하시면서, 궁금하신 부분을 질문해주세요' },
   ]);
@@ -21,7 +30,7 @@ export default function ChatbotPage() {
   const sendMessage = async () => {
     if (!input.trim()) return;
 
-    const userMessage = { from: 'user' as const, text: input };
+    const userMessage: Message = { from: 'user', text: input };
     setMessages((prev) => [...prev, userMessage]);
     setLoading(true);
 
@@ -31,11 +40,15 @@ export default function ChatbotPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: input }),
       });
+
       const data = await res.json();
-      const botMessage = { from: 'bot' as const, text: data.answer };
+      const botMessage: Message = { from: 'bot', text: data.answer };
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
-      setMessages((prev) => [...prev, { from: 'bot', text: '에러가 발생했어요.' }]);
+      setMessages((prev) => [
+        ...prev,
+        { from: 'bot', text: '에러가 발생했어요.' },
+      ]);
     } finally {
       setInput('');
       setLoading(false);
