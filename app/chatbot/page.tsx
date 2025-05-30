@@ -9,8 +9,8 @@ type Message = {
 };
 
 export default function ChatbotPage() {
-  const [open, setOpen] = useState(true);
-  const [date, setDate] = useState(
+  const [open, setOpen] = useState(false);
+  const [date] = useState(
     new Date().toLocaleTimeString('en-US', {
       hour: 'numeric',
       minute: '2-digit',
@@ -23,39 +23,40 @@ export default function ChatbotPage() {
   ]);
 
   return (
-    <main className="flex flex-col h-screen p-4 absolute z-10 py-12 right-2">
+    <main className="relative w-screen h-screen bg-transparent">
       {!open && (
         <button
           onClick={() => setOpen(true)}
-          className="fixed bottom-6 right-6 bg-white shadow-lg w-16 h-16 rounded-full flex items-center justify-center hover:scale-105 transition"
+          className="fixed bottom-6 right-6 bg-white shadow-lg w-16 h-16 rounded-full flex items-center justify-center hover:scale-105 transition z-50"
         >
           <img src="/robot.png" alt="chat" className="w-10 h-10" />
         </button>
       )}
 
       {open && (
-        <div className="relative pt-4 rounded-2xl shadow-5xl shadow-white bg-[rgba(255,255,255,0.77)] w-full h-full border-3">
-          <button
-            onClick={() => setOpen(false)}
-            className="absolute top-2 right-2 text-sm bg-gray-200 px-2 py-1 rounded hover:bg-gray-300"
-          >
-            ✕
-          </button>
+        <div className="fixed bottom-6 right-6 w-[360px] h-[600px] bg-[rgba(255,255,255,0.95)] rounded-2xl border shadow-xl flex flex-col justify-between z-50">
+          <div className="relative pt-4 px-4 flex-shrink-0">
+            <button
+              onClick={() => setOpen(false)}
+              className="absolute top-2 right-2 text-sm bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
+            >
+              닫기
+            </button>
+            <p className="text-center text-gray-700">Today {date}</p>
+          </div>
 
-          <p className="w-full text-center text-gray-700">Today {date}</p>
-
-          <div className="px-2 py-4 flex-1 overflow-y-auto space-y-2 text-black flex flex-col items-left">
+          <div className="px-4 py-2 flex-1 overflow-y-auto space-y-2">
             {messages.map((msg, idx) => (
               <ChatBubble key={idx} from={msg.from} text={msg.text} />
             ))}
           </div>
 
-          <div className="absolute bottom-4 mt-4 flex gap-1 mx-1 w-full px-4">
+          <div className="border-t px-4 py-3 bg-white flex gap-2">
             <input
-              className="w-full border px-4 py-2 rounded-xl bg-white text-gray-600"
+              className="flex-1 border px-3 py-2 rounded-xl text-gray-700"
               placeholder="메시지를 입력하세요"
             />
-            <button className="min-w-14 bg-[rgba(0,0,0,0.7)] rounded-xl cursor-pointer">
+            <button className="bg-black text-white px-4 py-2 rounded-xl">
               전송
             </button>
           </div>
