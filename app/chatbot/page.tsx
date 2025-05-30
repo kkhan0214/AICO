@@ -55,16 +55,18 @@ export default function ChatbotPage() {
 
   return (
     <main className="flex flex-col h-screen p-4 absolute z-10 py-12 right-2">
-      <div className="relative pt-4 rounded-2xl shadow-5xl shadow-white bg-[rgba(255,255,255,0.77)] w-full h-full border-3">
+      <div className="relative pt-4 rounded-2xl shadow-5xl shadow-white bg-[rgba(255,255,255,0.77)] w-full max-h-[600px] overflow-y-auto border-3">
         <p className="w-full text-center text-gray-700">Today {date}</p>
-
-        <div className="px-2 py-4 flex-1 overflow-y-auto space-y-2 text-black flex flex-col items-left">
+      
+        {/* ✅ 이 영역 안에서만 스크롤 발생 */}
+        <div className="px-2 py-4 space-y-2 text-black flex flex-col">
           {messages.map((msg, idx) => (
             <ChatBubble key={idx} from={msg.from} text={msg.text} />
           ))}
           {loading && <ChatBubble from="bot" text="GPT가 답변을 작성 중이에요..." />}
         </div>
-
+      
+        {/* 입력창은 기존처럼 유지 */}
         <div className="absolute bottom-4 mt-4 flex gap-1 mx-1 w-full px-4">
           <input
             className="w-full border px-4 py-2 rounded-xl bg-white text-gray-600"
@@ -76,7 +78,7 @@ export default function ChatbotPage() {
           <button
             onClick={sendMessage}
             className="px-4 py-2 whitespace-nowrap bg-[rgba(0,0,0,0.7)] text-white rounded-xl"
-            >
+          >
             전송
           </button>
         </div>
