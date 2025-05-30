@@ -15,4 +15,10 @@ export async function POST(req: NextRequest) {
         messages: [{ role: 'user', content: message }],
       }),
     });
+
+    return NextResponse.json({ status: 'ok' }); // 또는 placeholder 응답
+
+  } catch (error) {
+    return NextResponse.json({ error: '요청 처리 중 오류 발생' }, { status: 500 });
+  }
 }
