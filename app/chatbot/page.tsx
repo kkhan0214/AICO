@@ -21,7 +21,7 @@ export default function ChatbotPage() {
   const sendMessage = async () => {
     if (!input.trim()) return;
 
-    const userMessage = { from: 'user', text: input };
+    const userMessage = { from: 'user' as const, text: input };
     setMessages((prev) => [...prev, userMessage]);
     setLoading(true);
 
@@ -32,10 +32,10 @@ export default function ChatbotPage() {
         body: JSON.stringify({ message: input }),
       });
       const data = await res.json();
-      const botMessage = { from: 'bot', text: data.answer };
+      const botMessage = { from: 'bot' as const, text: data.answer };
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
-      setMessages((prev) => [...prev, { from: 'bot', text: '에러가 발생했어요 😢' }]);
+      setMessages((prev) => [...prev, { from: 'bot', text: '에러가 발생했어요.' }]);
     } finally {
       setInput('');
       setLoading(false);
