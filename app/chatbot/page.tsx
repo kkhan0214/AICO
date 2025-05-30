@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import ChatBubble from '@/components/chatBubble';
 
-// 메시지 타입 정의
 type Message = {
   from: 'user' | 'bot';
   text: string;
@@ -18,8 +17,7 @@ export default function ChatbotPage() {
     })
   );
 
-  // 메시지 상태 타입 명시
-  const [messages, setMessages] = useState<Message[]>([
+  const [messages, setMessages] = useState<Array<{ from: 'user' | 'bot'; text: string }>>([
     { from: 'bot', text: '안녕하세요! 무엇을 도와드릴까요?' },
     { from: 'bot', text: '파이썬을 공부하시면서, 궁금하신 부분을 질문해주세요' },
   ]);
