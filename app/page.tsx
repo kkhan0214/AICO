@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import ChatBubble from '@/components/chatBubble';
 
 type Message = {
@@ -17,19 +17,13 @@ export default function ChatbotPage() {
     })
   );
 
-  const [messages, setMessages] = useState<Message[]>([
+  const [messages, setMessages] = useState<Array<{ from: 'user' | 'bot'; text: string }>>([
     { from: 'bot', text: '안녕하세요! 무엇을 도와드릴까요?' },
     { from: 'bot', text: '파이썬을 공부하시면서, 궁금하신 부분을 질문해주세요' },
   ]);
 
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
-  const bottomRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -60,49 +54,33 @@ export default function ChatbotPage() {
   };
 
   return (
-    <main className="fixed bottom-4 right-4 z-50">
-      {/* 챗봇 토글 버튼 */}
-      {!open && (
-        <button
-          className="bg-purple-600 text-white px-4 py-2 rounded-full shadow-lg"
-          onClick={() => setOpen(true)}
-        >
-          챗봇 열기
-        </button>
-      )}
+    <main className="flex flex-col h-screen p-4 absolute z-10 py-12 right-2">
+      <div className="relative pt-4 rounded-2xl shadow-5xl shadow-white bg-[rgba(255,255,255,0.77)] w-full h-full border-3">
+        <p className="w-full text-center text-gray-700">Today {date}</p>
 
-      {/* 챗봇 창 */}
-      {open && (
-        <div className="w-[360px] h-[600px] flex flex-col rounded-2xl bg-white shadow-2xl border border-gray-300 overflow-hidden">
-          <div className="text-center text-gray-500 pt-2 border-b">Today {date}</div>
-
-          <div className="flex-1 overflow-y-auto px-4 py-2 space-y-2">
-            {messages.map((msg, idx) => (
-              <ChatBubble key={idx} from={msg.from} text={msg.text} />
-            ))}
-            {loading && <ChatBubble from="bot" text="GPT가 답변을 작성 중이에요..." />}
-            <div ref={bottomRef} />
-          </div>
-
-          <div className="border-t px-4 py-3 bg-white">
-            <div className="flex gap-2 items-center">
-              <input
-                className="flex-1 border px-4 py-2 rounded-xl text-gray-700"
-                placeholder="메시지를 입력하세요"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-              />
-              <button
-                onClick={sendMessage}
-                className="bg-purple-600 text-white px-4 py-2 rounded-xl"
-              >
-                전송
-              </button>
-            </div>
-          </div>
+        <div className="px-2 py-4 flex-1 overflow-y-auto space-y-2 text-black flex flex-col items-left">
+          {messages.map((msg, idx) => (
+            <ChatBubble key={idx} from={msg.from} text={msg.text} />
+          ))}
+          {loading && <ChatBubble from="bot" text="GPT가 답변을 작성 중이에요..." />}
         </div>
-      )}
+
+        <div className="absolute bottom-4 mt-4 flex gap-1 mx-1 w-full px-4">
+          <input
+            className="w-full border px-4 py-2 rounded-xl bg-white text-gray-600"
+            placeholder="메시지를 입력하세요"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+          />
+          <button
+            onClick={sendMessage}
+            className="px-4 py-2 whitespace-nowrap bg-[rgba(0,0,0,0.7)] text-white rounded-xl"
+            >
+            전송
+          </button>
+        </div>
+      </div>
     </main>
   );
-} 
+}
