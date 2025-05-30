@@ -75,8 +75,8 @@ export default function ChatbotPage() {
           />
           <button
             onClick={sendMessage}
-            className="min-w-14 bg-[rgba(0,0,0,0.7)] text-white px-4 py-2 rounded-xl cursor-pointer"
-          >
+            className="px-4 py-2 whitespace-nowrap bg-[rgba(0,0,0,0.7)] text-white rounded-xl"
+            >
             전송
           </button>
         </div>
