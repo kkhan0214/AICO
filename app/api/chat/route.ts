@@ -15,6 +15,4 @@ export async function POST(req: NextRequest) {
         messages: [{ role: 'user', content: message }],
       }),
     });
-
-    const data = await response.json();
 }
