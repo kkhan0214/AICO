@@ -23,7 +23,12 @@ export default function ChatbotPage() {
   ]);
 
   return (
-    <main className="relative w-screen h-screen bg-transparent">
+    <main className="relative w-screen h-screen bg-gradient-to-br from-sky-200 to-sky-50 flex items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-5xl font-black text-black mb-2">파이썬 교육자료</h1>
+        <p className="text-lg text-gray-700">(자료가 보여질 공간)</p>
+      </div>
+
       {!open && (
         <button
           onClick={() => setOpen(true)}
@@ -35,11 +40,11 @@ export default function ChatbotPage() {
 
       {open && (
         <div className="fixed bottom-6 right-6 w-[360px] h-[600px] bg-[rgba(255,255,255,0.95)] rounded-2xl border shadow-xl flex flex-col justify-between z-50">
-          <div className="relative px-4 py-3 border-b bg-white flex items-center justify-between">
-            <p className="text-sm text-gray-700">AI 튜터 챗봇</p>
+          <div className="relative pt-4 px-4 flex-shrink-0 border-b pb-2">
+            <p className="text-center text-gray-700">AI 튜터 챗봇</p>
             <button
               onClick={() => setOpen(false)}
-              className="text-sm text-gray-600 bg-gray-200 px-3 py-1 rounded hover:bg-gray-300 z-10"
+              className="absolute top-3 right-3 text-sm text-gray-600 bg-gray-200 px-3 py-1 rounded hover:bg-gray-300 z-10"
             >
               닫기
             </button>
@@ -56,7 +61,7 @@ export default function ChatbotPage() {
               className="flex-1 border px-3 py-2 rounded-xl text-gray-700"
               placeholder="메시지를 입력하세요"
             />
-            <button className="bg-black text-white px-4 py-2 rounded-xl">
+            <button className="bg-purple-600 text-white px-4 py-2 rounded-xl">
               전송
             </button>
           </div>
