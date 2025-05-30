@@ -35,14 +35,14 @@ export default function ChatbotPage() {
 
       {open && (
         <div className="fixed bottom-6 right-6 w-[360px] h-[600px] bg-[rgba(255,255,255,0.95)] rounded-2xl border shadow-xl flex flex-col justify-between z-50">
-          <div className="relative pt-4 px-4 flex-shrink-0">
+          <div className="relative pt-4 px-4 flex-shrink-0 border-b pb-2">
+            <p className="text-center text-gray-700">Today {date}</p>
             <button
               onClick={() => setOpen(false)}
-              className="absolute top-2 right-2 text-sm bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
+              className="absolute top-2 right-2 text-sm text-gray-600 px-2 py-1 rounded hover:bg-gray-200"
             >
               닫기
             </button>
-            <p className="text-center text-gray-700">Today {date}</p>
           </div>
 
           <div className="px-4 py-2 flex-1 overflow-y-auto space-y-2">
