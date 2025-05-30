@@ -34,32 +34,29 @@ export default function ChatbotPage() {
       )}
 
       {open && (
-        <div className="fixed bottom-6 right-6 w-[360px] h-[600px] bg-[rgba(255,255,255,0.95)] rounded-2xl border shadow-xl flex flex-col z-50">
-          {/* 상단 바 */}
-          <div className="relative px-4 py-3 border-b bg-white flex items-center justify-center">
-            <p className="text-center text-gray-700 text-sm">AI 튜터 챗봇</p>
+        <div className="fixed bottom-6 right-6 w-[360px] h-[600px] bg-[rgba(255,255,255,0.95)] rounded-2xl border shadow-xl flex flex-col justify-between z-50">
+          <div className="relative px-4 py-3 border-b bg-white flex items-center justify-between">
+            <p className="text-sm text-gray-700">AI 튜터 챗봇</p>
             <button
               onClick={() => setOpen(false)}
-              className="absolute right-3 top-2 text-xs bg-gray-200 px-2 py-1 rounded hover:bg-gray-300"
+              className="text-sm text-gray-600 bg-gray-200 px-3 py-1 rounded hover:bg-gray-300 z-10"
             >
               닫기
             </button>
           </div>
 
-          {/* 채팅 내용 */}
-          <div className="flex-1 overflow-y-auto px-4 py-2 space-y-2 bg-white">
+          <div className="px-4 py-2 flex-1 overflow-y-auto space-y-2">
             {messages.map((msg, idx) => (
               <ChatBubble key={idx} from={msg.from} text={msg.text} />
             ))}
           </div>
 
-          {/* 입력창 */}
           <div className="border-t px-4 py-3 bg-white flex gap-2">
             <input
               className="flex-1 border px-3 py-2 rounded-xl text-gray-700"
               placeholder="메시지를 입력하세요"
             />
-            <button className="bg-purple-600 text-white px-4 py-2 rounded-xl hover:bg-purple-700">
+            <button className="bg-black text-white px-4 py-2 rounded-xl">
               전송
             </button>
           </div>
