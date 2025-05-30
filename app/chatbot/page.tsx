@@ -3,14 +3,23 @@
 import { useState } from 'react';
 import ChatBubble from '@/components/chatBubble';
 
-export default function ChatbotPage() {
-  const [date, setDate] = useState(new Date().toLocaleTimeString('en-US', {
-    hour: 'numeric',
-    minute: '2-digit',
-    hour12: true,
-  }));
+// ✅ Message 타입 명시
+type Message = {
+  from: 'user' | 'bot';
+  text: string;
+};
 
-  const [messages, setMessages] = useState([
+export default function ChatbotPage() {
+  const [date, setDate] = useState(
+    new Date().toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+    })
+  );
+
+  // ✅ messages에 타입 명시
+  const [messages, setMessages] = useState<Message[]>([
     { from: 'bot', text: '안녕하세요! 무엇을 도와드릴까요?' },
     { from: 'bot', text: '파이썬을 공부하시면서, 궁금하신 부분을 질문해주세요' },
   ]);
