@@ -4,24 +4,28 @@ export async function POST(req: NextRequest) {
   const { message } = await req.json();
 
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
       headers: {
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: message }],
+        model: 'gpt-3.5-turbo',
+        messages: [{ role: 'user', content: message }],
       }),
     });
 
     const data = await response.json();
-    const reply = data.choices?.[0]?.message?.content || "답변을 받아오지 못했어요.";
 
+    // ✅ 여기서 응답 확인!
+    console.log('🔥 GPT 응답 데이터:', data);
+
+    const reply = data.choices?.[0]?.message?.content || '답변을 받아오지 못했어요.';
     return NextResponse.json({ answer: reply });
-  } catch (error) {
-    console.error("GPT API 호출 실패:", error);
-    return NextResponse.json({ answer: "서버 오류가 발생했습니다." }, { status: 500 });
+
+  } catch (err) {
+    console.error('❌ GPT API 호출 중 오류 발생:', err);
+    return NextResponse.json({ answer: '서버 오류가 발생했습니다.' }, { status: 500 });
   }
 }
