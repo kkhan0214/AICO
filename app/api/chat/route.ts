@@ -16,9 +16,16 @@ export async function POST(req: NextRequest) {
       }),
     });
 
-    return NextResponse.json({ status: 'ok' }); // 또는 placeholder 응답
+    const data = await response.json();
+
+    // ✅ 여기서 GPT 응답 전체 로그 찍기
+    console.log('📦 GPT 응답 전체 데이터:', JSON.stringify(data, null, 2));
+
+    const reply = data.choices?.[0]?.message?.content || '답변을 받아오지 못했어요.';
+    return NextResponse.json({ answer: reply });
 
   } catch (error) {
-    return NextResponse.json({ error: '요청 처리 중 오류 발생' }, { status: 500 });
+    console.error('❌ OpenAI API 호출 실패:', error);
+    return NextResponse.json({ answer: '서버 오류가 발생했어요.' }, { status: 500 });
   }
 }
