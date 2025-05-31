@@ -58,7 +58,7 @@ export default function Chat() {
           placeholder="질문을 입력하세요"
           className="flex-1 border px-3 py-2 rounded-xl text-gray-700"
         />
-        <button onClick={sendMessage} className="bg-purple-600 text-white px-4 py-2 rounded-xl">
+        <button onClick={sendMessage} className="bg-blue-400 hover:bg-blue-500 text-white px-4 py-2 rounded-xl">
           전송
         </button>
       </div>
