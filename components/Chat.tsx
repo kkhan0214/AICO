@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import ChatBubble from './chatBubble';
 
 type Message = {
@@ -15,6 +15,15 @@ export default function Chat() {
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, loading]);
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -42,15 +51,18 @@ export default function Chat() {
   };
 
   return (
-    <div className="flex flex-col flex-1">
+    <div className="flex flex-col h-full">
+      {/* 채팅 메시지 영역 */}
       <div className="flex-1 overflow-y-auto px-4 py-2 space-y-2">
         {messages.map((msg, idx) => (
           <ChatBubble key={idx} from={msg.from} text={msg.text} />
         ))}
         {loading && <ChatBubble from="bot" text="답변 작성 중..." />}
+        <div ref={messagesEndRef} />
       </div>
 
-      <div className="flex-shrink-0 border-t px-4 py-3 bg-white flex gap-2">
+      {/* 입력창 영역 */}
+      <div className="border-t px-4 py-3 bg-white flex gap-2 shrink-0">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -58,7 +70,7 @@ export default function Chat() {
           placeholder="질문을 입력하세요"
           className="flex-1 border px-3 py-2 rounded-xl text-gray-700"
         />
-        <button onClick={sendMessage} className="bg-blue-400 hover:bg-blue-500 text-white px-4 py-2 rounded-xl">
+        <button onClick={sendMessage} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl">
           전송
         </button>
       </div>
