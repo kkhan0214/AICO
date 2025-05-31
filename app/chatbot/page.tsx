@@ -34,7 +34,7 @@ export default function ChatbotPage() {
               onClick={() => setOpen(false)}
               className="absolute top-2 right-2 text-sm bg-red-400 text-white px-2.5 py-1 rounded-full hover:bg-red-500 transition"
             >
-              ✕
+              닫기
             </button>
           </div>
 
