@@ -10,13 +10,13 @@ export default function Home() {
     <main className="relative w-screen min-h-screen bg-gradient-to-br from-sky-200 to-sky-50 flex flex-col items-center pt-16 pb-24">
       {/* 메인 제목 */}
       <div className="text-center mb-6">
-        <h1 className="text-5xl font-black text-black mb-2">파이썬 교육자료</h1>
-        <p className="text-lg text-gray-700">아래에서 교육자료를 확인해보세요</p>
+        <h1 className="text-5xl font-black text-black mb-2">AIco 코딩 교육 플랫폼</h1>
+        <p className="text-lg text-gray-700">아래에서 자료를 참고하세요</p>
       </div>
 
       {/* PDF 뷰어 삽입 */}
       <iframe
-        src="/slides/python.pdf"
+        src="/slides/test1.pdf"
         className="w-[90%] max-w-4xl h-[700px] border rounded shadow-lg"
         title="파이썬 교육자료"
       />
