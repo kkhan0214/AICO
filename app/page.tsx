@@ -18,7 +18,7 @@ export default function Home() {
       <embed
         src="/slides/test1.pdf"
         type="application/pdf"
-        className="w-[90%] max-w-4xl h-[700px] border rounded shadow-lg"
+        className="w-[95%] max-w-6xl h-[700px] border rounded shadow-lg"
         title="파이썬 교육자료"
       />
 
