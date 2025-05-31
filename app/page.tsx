@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import ChatbotBox from './chatbot/ChatbotBox';
+import PDFViewer from '@/components/PDFViewer';
 
 export default function Home() {
   const [open, setOpen] = useState(false);
