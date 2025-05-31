@@ -1,9 +1,4 @@
-type Props = {
-  from: 'bot' | 'user';
-  text: string;
-};
-
-const ChatBubble = ({ from, text }: Props) => {
+export default function ChatBubble({ from, text }: { from: 'user' | 'bot'; text: string }) {
   const isBot = from === 'bot';
 
   return (
@@ -17,6 +12,4 @@ const ChatBubble = ({ from, text }: Props) => {
       </div>
     </div>
   );
-};
-
-export default ChatBubble;
+}
