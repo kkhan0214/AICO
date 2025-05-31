@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import ChatBubble from './chatBubble';
+import ChatBubble from '@/components/chatBubble';
 
 type Message = {
   from: 'user' | 'bot';
@@ -9,7 +9,10 @@ type Message = {
 };
 
 export default function Chat() {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([
+    { from: 'bot', text: '안녕하세요! 무엇을 도와드릴까요?' },
+    { from: 'bot', text: '파이썬을 공부하시면서, 궁금하신 부분을 질문해주세요' },
+  ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
 
