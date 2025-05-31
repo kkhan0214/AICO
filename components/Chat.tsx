@@ -1,58 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import ChatbotPage from './chatbot/page';
-
-export default function ChatPage() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <div className='flex w-full h-full bg-[url("/sample.png")] bg-contain bg-center bg-no-repeat'>
-      {/* 열기/닫기 버튼 */}
-      <div
-        onClick={() => setOpen((prev) => !prev)}
-        className={
-          open
-            ? 'absolute top-3 right-12 z-40'
-            : 'absolute right-12 bottom-16 bg-black w-24 h-24 rounded-full border-3 shadow-2xl flex items-center justify-center cursor-pointer'
-        }
-      >
-        {open ? (
-          <p className="cursor-pointer bg-[rgba(255,100,100,0.7)] w-30 py-0.5 rounded-2xl z-30 text-center">
-            채팅 닫기
-          </p>
-        ) : (
-          <img src="/robot.png" className="h-full" />
-        )}
-      </div>
-
-      {/* 챗봇 */}
-      {open && <ChatbotPage />}
-    </div>
-  );
-}
-
-// chatbot/page.tsx
-'use client';
-
-import Chat from '@/components/Chat';
-
-export default function ChatbotPage() {
-  return (
-    <div className="fixed bottom-6 right-6 w-[360px] h-[600px] bg-[rgba(255,255,255,0.95)] rounded-2xl border shadow-xl flex flex-col z-[1000]">
-      <div className="relative pt-4 px-4 flex-shrink-0 border-b pb-2">
-        <p className="text-center text-gray-700 font-semibold">AI 튜터 챗봇</p>
-      </div>
-
-      <Chat />
-    </div>
-  );
-}
-
-// components/Chat.tsx
-'use client';
-
-import { useState } from 'react';
 import ChatBubble from './chatBubble';
 
 type Message = {
@@ -112,23 +60,5 @@ export default function Chat() {
         </button>
       </div>
     </>
-  );
-}
-
-// components/chatBubble.tsx
-
-export default function ChatBubble({ from, text }: { from: 'user' | 'bot'; text: string }) {
-  const isBot = from === 'bot';
-
-  return (
-    <div className={`flex ${isBot ? 'justify-start' : 'justify-end'}`}>
-      <div
-        className={`px-4 py-2 rounded-xl max-w-md w-fit whitespace-pre-wrap break-words ${
-          isBot ? 'bg-gray-300 text-black' : 'bg-purple-500 text-white'
-        }`}
-      >
-        {text?.trim() ? text : '...'}
-      </div>
-    </div>
   );
 }
