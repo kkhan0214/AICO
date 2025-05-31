@@ -20,7 +20,7 @@ export default function Home() {
           onClick={() => setOpen(true)}
           className="fixed bottom-6 right-6 bg-white shadow-lg w-16 h-16 rounded-full flex items-center justify-center hover:scale-105 transition z-50"
         >
-          <img src="/robot.png" alt="chat" className="w-10 h-10" />
+          <img src="/robot.png" alt="chat" className="w-10 h-10 object-contain" />
         </button>
       )}
 
