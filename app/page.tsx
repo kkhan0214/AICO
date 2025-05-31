@@ -14,9 +14,10 @@ export default function Home() {
         <p className="text-lg text-gray-700">아래에서 자료를 참고하세요</p>
       </div>
 
-      {/* PDF 뷰어 삽입 */}
-      <iframe
+      {/* PDF 뷰어 - embed 방식 */}
+      <embed
         src="/slides/test1.pdf"
+        type="application/pdf"
         className="w-[90%] max-w-4xl h-[700px] border rounded shadow-lg"
         title="파이썬 교육자료"
       />
