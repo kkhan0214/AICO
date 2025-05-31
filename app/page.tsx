@@ -1,13 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import ChatbotBox from './chatbot/ChatbotBox'; // ✅ 이름을 page.tsx 말고 Box 컴포넌트로 빼는 게 좋아요
+import ChatbotBox from './chatbot/ChatbotBox';
 
 export default function Home() {
   const [open, setOpen] = useState(false);
 
   return (
     <main className="relative w-screen h-screen bg-gradient-to-br from-sky-200 to-sky-50 flex items-center justify-center">
+      {/* 메인 콘텐츠 */}
       <div className="text-center">
         <h1 className="text-5xl font-black text-black mb-2">파이썬 교육자료</h1>
         <p className="text-lg text-gray-700">(자료가 보여질 공간)</p>
